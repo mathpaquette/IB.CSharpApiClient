@@ -8,7 +8,7 @@ namespace IB.CSharpApiClient
 {
     public abstract class ApiClient : IApiClient
     {
-        private readonly EReaderMonitorSignal _readerMonitorSignal;
+        private readonly EReaderSignal _readerMonitorSignal;
 
         protected readonly IApiEvent EventDispatcher;
         protected readonly EClientSocket ClientSocket;
@@ -22,11 +22,14 @@ namespace IB.CSharpApiClient
             set => _nextValidOrderId = value;
         }
 
-        protected ApiClient()
+        protected ApiClient(
+            IApiEventDispatcher apiEventDispatcher = null,
+            EReaderSignal readerMonitorSignal = null,
+            EClientSocket clientSocket = null)
         {
-            var eventDispatcher = new ApiEventDispatcher();
-            _readerMonitorSignal = new EReaderMonitorSignal();
-            ClientSocket = new EClientSocket(eventDispatcher, _readerMonitorSignal);
+            var eventDispatcher = apiEventDispatcher ?? new ApiEventDispatcher();
+            _readerMonitorSignal = readerMonitorSignal ?? new EReaderMonitorSignal();
+            ClientSocket = clientSocket ?? new EClientSocket(eventDispatcher, _readerMonitorSignal);
 
             EventDispatcher = eventDispatcher;
             EventDispatcher.ConnectAck += EventDispatcherOnConnectAck;
