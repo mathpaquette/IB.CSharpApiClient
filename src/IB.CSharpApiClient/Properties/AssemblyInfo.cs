@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Inovitex Technologies Inc.")]
 [assembly: AssemblyProduct("IB.CSharpApiClient")]
-[assembly: AssemblyCopyright("Copyright © Inovitex Technologies Inc. 2018")]
+[assembly: AssemblyCopyright("Copyright © 2018 Inovitex Technologies Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
