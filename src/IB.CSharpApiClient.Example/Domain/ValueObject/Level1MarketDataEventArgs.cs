@@ -3,7 +3,7 @@ using IBApi;
 
 namespace IB.CSharpApiClient.Example.Domain.ValueObject
 {
-    public class Level1MarketData : EventArgs
+    public class Level1MarketDataEventArgs : EventArgs
     {
         public int BidSize { get; private set; }
         public double Bid { get; private set; }
@@ -20,15 +20,15 @@ namespace IB.CSharpApiClient.Example.Domain.ValueObject
 
         public int Volume { get; private set; }
 
-        public Level1MarketData()
+        public Level1MarketDataEventArgs()
         {
             BidSize = AskSize = LastSize = Volume = -1;
             Bid = Ask = Open = High = Low = Close = -1;
         }
 
-        public Level1MarketData ShallowCopy()
+        public Level1MarketDataEventArgs ShallowCopy()
         {
-            return (Level1MarketData)this.MemberwiseClone();
+            return (Level1MarketDataEventArgs)this.MemberwiseClone();
         }
 
         public void UpdateValues(int field, double price)

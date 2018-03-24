@@ -13,14 +13,14 @@ namespace IB.CSharpApiClient.Example.Infrastructure
 {
     public class RealTimeDataProviderExample : ApiClient, IRealTimeDataProviderExample
     {
-        public event EventHandler<Level1MarketData> MarketData;
+        public event EventHandler<Level1MarketDataEventArgs> MarketData;
         private readonly Dictionary<string, int> _requestIdsBySymbol;
-        private readonly Dictionary<int, Level1MarketData> _lastsByRequestId;
+        private readonly Dictionary<int, Level1MarketDataEventArgs> _lastsByRequestId;
 
         public RealTimeDataProviderExample()
         {
             _requestIdsBySymbol = new Dictionary<string, int>();
-            _lastsByRequestId = new Dictionary<int, Level1MarketData>();
+            _lastsByRequestId = new Dictionary<int, Level1MarketDataEventArgs>();
             EventDispatcher.TickPrice += EventDispatcherOnTickPrice;
             EventDispatcher.TickSize += EventDispatcherOnTickSize;
         }
@@ -97,7 +97,7 @@ namespace IB.CSharpApiClient.Example.Infrastructure
         {
             if (!_lastsByRequestId.TryGetValue(tickPriceEventArgs.RequestId, out var last))
             {
-                last = new Level1MarketData();
+                last = new Level1MarketDataEventArgs();
                 _lastsByRequestId.Add(tickPriceEventArgs.RequestId, last);
             }
 
@@ -109,7 +109,7 @@ namespace IB.CSharpApiClient.Example.Infrastructure
         {
             if (!_lastsByRequestId.TryGetValue(tickSizeEventArgs.RequestId, out var last))
             {
-                last = new Level1MarketData();
+                last = new Level1MarketDataEventArgs();
                 _lastsByRequestId.Add(tickSizeEventArgs.RequestId, last);
             }
 

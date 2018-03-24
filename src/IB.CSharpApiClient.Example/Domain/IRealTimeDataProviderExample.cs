@@ -8,7 +8,7 @@ namespace IB.CSharpApiClient.Example.Domain
 {
     public interface IRealTimeDataProviderExample : IApiClient
     {
-        event EventHandler<Level1MarketData> MarketData;
+        event EventHandler<Level1MarketDataEventArgs> MarketData;
         Task<Scanner[]> GetScannerAsync(ScannerSubscription scannerSubscription, List<TagValue> scannerSubscriptionOptions = null);
         void SubscribeMarketData(string symbol);
         void UnsubscribeMarketData(string symbol);

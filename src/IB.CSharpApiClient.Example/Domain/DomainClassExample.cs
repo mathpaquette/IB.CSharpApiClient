@@ -16,9 +16,9 @@ namespace IB.CSharpApiClient.Example.Domain
             _realTimeDataProviderExample = realTimeDataProviderExample;
         }
 
-        private void RealTimeDataProviderExampleOnMarketData(object sender, Level1MarketData level1MarketData)
+        private void RealTimeDataProviderExampleOnMarketData(object sender, Level1MarketDataEventArgs level1MarketDataEventArgs)
         {
-            Logger.Info(level1MarketData);
+            Logger.Info(level1MarketDataEventArgs);
         }
 
         public async void RequestDataExample(string host, int port, int clientId)

@@ -14,12 +14,11 @@ namespace IB.CSharpApiClient
         protected readonly EClientSocket ClientSocket;
         protected const int DefaultTimeoutMs = 30000;
 
-        private volatile int _nextValidOrderId = 0;
-
+        private volatile int _nextValidOrderId = 0; // TODO: validate volatile usage.
         protected int NextValidOrderId
         {
-            get => _nextValidOrderId;
-            set => _nextValidOrderId = value;
+            get { return _nextValidOrderId; }
+            set { _nextValidOrderId = value; }
         }
 
         protected ApiClient(
