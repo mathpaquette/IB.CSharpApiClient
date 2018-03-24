@@ -17,8 +17,8 @@ namespace IB.CSharpApiClient
         private volatile int _nextValidOrderId = 0; // TODO: validate volatile usage.
         protected int NextValidOrderId
         {
-            get { return _nextValidOrderId; }
-            set { _nextValidOrderId = value; }
+            get => _nextValidOrderId;
+            set => _nextValidOrderId = value;
         }
 
         protected ApiClient(
