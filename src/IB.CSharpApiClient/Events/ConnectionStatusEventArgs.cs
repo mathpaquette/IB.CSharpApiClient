@@ -4,8 +4,8 @@ namespace IB.CSharpApiClient.Events
 {
     public class ConnectionStatusEventArgs : EventArgs
     {
-        public bool IsConnected { get; }
-        public int NextValidOrderId { get; }
+        public bool IsConnected { get; private set; }
+        public int NextValidOrderId { get; private set; }
 
         public ConnectionStatusEventArgs(bool isConnected, int orderId)
         {

@@ -19,14 +19,14 @@ namespace IB.CSharpApiClient.Events
             DividendsToLastTradeDate = dividendsToLastTradeDate;
         }
 
-        public int RequestId { get; }
-        public int TickType { get; }
-        public double BasisPoints { get; }
-        public string FormattedBasisPoints { get; }
-        public double ImpliedFuture { get; }
-        public int HoldDays { get; }
-        public string FutureLastTradeDate { get; }
-        public double DividendImpact { get; }
-        public double DividendsToLastTradeDate { get; }
+        public int RequestId { get; private set; }
+        public int TickType { get; private set; }
+        public double BasisPoints { get; private set; }
+        public string FormattedBasisPoints { get; private set; }
+        public double ImpliedFuture { get; private set; }
+        public int HoldDays { get; private set; }
+        public string FutureLastTradeDate { get; private set; }
+        public double DividendImpact { get; private set; }
+        public double DividendsToLastTradeDate { get; private set; }
     }
 }

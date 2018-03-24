@@ -7,6 +7,6 @@
             Value = value;
         }
 
-        public double Value { get; }
+        public double Value { get; private set; }
     }
 }

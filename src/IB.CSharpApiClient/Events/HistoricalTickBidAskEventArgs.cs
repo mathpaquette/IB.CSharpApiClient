@@ -4,13 +4,13 @@ namespace IB.CSharpApiClient.Events
 {
     public class HistoricalTickBidAskEventArgs : EventArgs
     {
-        public int ReqId { get; set; }
-        public long Time { get; set; }
-        public int Mask { get; set; }
-        public double PriceBid { get; set; }
-        public double PriceAsk { get; set; }
-        public long SizeBid { get; set; }
-        public long SizeAsk { get; set; }
+        public int ReqId { get; private set; }
+        public long Time { get; private set; }
+        public int Mask { get; private set; }
+        public double PriceBid { get; private set; }
+        public double PriceAsk { get; private set; }
+        public long SizeBid { get; private set; }
+        public long SizeAsk { get; private set; }
 
         public HistoricalTickBidAskEventArgs(int reqId, long time, int mask, double priceBid, double priceAsk, long sizeBid, long sizeAsk)
         {

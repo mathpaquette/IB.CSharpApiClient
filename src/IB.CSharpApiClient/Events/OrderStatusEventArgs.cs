@@ -15,8 +15,8 @@
 
         public OrderStatusEventArgs(int orderId, string status, double filled, double remaining, double avgFillPrice,
            int permId, int parentId, double lastFillPrice, int clientId, string whyHeld, double mktCapPrice)
+            : base(orderId)
         {
-            OrderId = orderId;
             Status = status;
             Filled = filled;
             Remaining = remaining;
@@ -27,6 +27,6 @@
             ClientId = clientId;
             WhyHeld = whyHeld;
             MktCapPrice = mktCapPrice;
-        }       
+        }
     }
 }

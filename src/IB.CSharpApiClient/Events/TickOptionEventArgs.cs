@@ -15,13 +15,13 @@
             UndPrice = undPrice;
         }
 
-        public double ImpliedVolatility { get; }
-        public double Delta { get; }
-        public double OptPrice { get; }
-        public double PvDividend { get; }
-        public double Gamma { get; }
-        public double Vega { get; }
-        public double Theta { get; }
-        public double UndPrice { get; }
+        public double ImpliedVolatility { get; private set; }
+        public double Delta { get; private set; }
+        public double OptPrice { get; private set; }
+        public double PvDividend { get; private set; }
+        public double Gamma { get; private set; }
+        public double Vega { get; private set; }
+        public double Theta { get; private set; }
+        public double UndPrice { get; private set; }
     }
 }

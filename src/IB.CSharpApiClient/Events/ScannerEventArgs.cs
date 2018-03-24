@@ -5,15 +5,7 @@ namespace IB.CSharpApiClient.Events
 {
     public class ScannerEventArgs : EventArgs
     {
-        private int requestId;
-        private int rank;
-        private IBApi.ContractDetails contractDetails;
-        private string distance;
-        private string benchmark;
-        private string projection;
-        private string legsStr;
-
-        public ScannerEventArgs(int reqId, int rank, IBApi.ContractDetails contractDetails, string distance, string benchmark, string projection, string legsStr)
+        public ScannerEventArgs(int reqId, int rank, ContractDetails contractDetails, string distance, string benchmark, string projection, string legsStr)
         {
             RequestId = reqId;
             Rank = rank;
@@ -24,49 +16,20 @@ namespace IB.CSharpApiClient.Events
             LegsStr = legsStr;
         }
 
-        public int RequestId
-        {
-            get { return requestId; }
-            set { requestId = value; }
-        }
+        public int RequestId { get; private set; }
 
-        public int Rank
-        {
-            get { return rank; }
-            set { rank = value; }
-        }
+        public int Rank { get; private set; }
 
-        public ContractDetails ContractDetails
-        {
-            get { return contractDetails; }
-            set { contractDetails = value; }
-        }
+        public ContractDetails ContractDetails { get; private set; }
 
-        public string Distance
-        {
-            get { return distance; }
-            set { distance = value; }
-        }
+        public string Distance { get; private set; }
 
-        public string Benchmark
-        {
-            get { return benchmark; }
-            set { benchmark = value; }
-        }
-        
+        public string Benchmark { get; private set; }
 
-        public string Projection
-        {
-            get { return projection; }
-            set { projection = value; }
-        }
-        
 
-        public string LegsStr
-        {
-            get { return legsStr; }
-            set { legsStr = value; }
-        }
+        public string Projection { get; private set; }
 
+
+        public string LegsStr { get; private set; }
     }
 }

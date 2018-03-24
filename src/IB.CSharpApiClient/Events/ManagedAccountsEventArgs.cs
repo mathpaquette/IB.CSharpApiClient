@@ -10,6 +10,6 @@ namespace IB.CSharpApiClient.Events
             ManagedAccounts = new List<string>(managedAccounts.Split(','));
         }
 
-        public IList<string> ManagedAccounts { get; }
+        public IList<string> ManagedAccounts { get; private set; }
     }
 }

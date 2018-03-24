@@ -9,6 +9,6 @@ namespace IB.CSharpApiClient.Events
             CurrentTime = time;
         }
 
-        public long CurrentTime { get; }
+        public long CurrentTime { get; private set; }
     }
 }

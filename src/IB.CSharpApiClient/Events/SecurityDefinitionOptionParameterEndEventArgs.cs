@@ -4,11 +4,11 @@ namespace IB.CSharpApiClient.Events
 {
     public class SecurityDefinitionOptionParameterEndEventArgs : EventArgs
     {
-        private int reqId;
+        public int RequestId { get; private set; }
 
         public SecurityDefinitionOptionParameterEndEventArgs(int reqId)
         {
-            this.reqId = reqId;
+            RequestId = reqId;
         }
     }
 }

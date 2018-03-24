@@ -7,6 +7,6 @@
             Size = size;
         }
 
-        public int Size { get; }
+        public int Size { get; private set; }
     }
 }

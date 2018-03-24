@@ -4,14 +4,6 @@ namespace IB.CSharpApiClient.Events
 {
     public class DeepBookEventArgs : EventArgs
     {
-        private int requestId;
-        private int position;
-        private int operation;
-        private int side;
-        private double price;
-        private int size;
-        private string marketMaker;
-
         public DeepBookEventArgs(int tickerId, int position, int operation, int side, double price, int size, string marketMaker)
         {
             RequestId = tickerId;
@@ -23,47 +15,18 @@ namespace IB.CSharpApiClient.Events
             MarketMaker = marketMaker;
         }
 
-        public int RequestId
-        {
-            get { return requestId; }
-            set { requestId = value; }
-        }
-        
-        public int Position
-        {
-            get { return position; }
-            set { position = value; }
-        }
-        
-        public int Operation
-        {
-            get { return operation; }
-            set { operation = value; }
-        }
+        public int RequestId { get; private set; }
 
-        public int Side
-        {
-            get { return side; }
-            set { side = value; }
-        }
-       
-        public double Price
-        {
-            get { return price; }
-            set { price = value; }
-        }
+        public int Position { get; private set; }
 
-        public int Size
-        {
-            get { return size; }
-            set { size = value; }
-        }
+        public int Operation { get; private set; }
 
-        public string MarketMaker
-        {
-            get { return marketMaker; }
-            set { marketMaker = value; }
-        }
-        
+        public int Side { get; private set; }
+
+        public double Price { get; private set; }
+
+        public int Size { get; private set; }
+
+        public string MarketMaker { get; private set; }
     }
 }

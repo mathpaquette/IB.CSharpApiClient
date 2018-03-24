@@ -21,13 +21,13 @@ namespace IB.CSharpApiClient.Events
             Message = message;
         }
 
-        public string Message { get; }
+        public string Message { get; private set; }
 
-        public int ErrorCode { get; }
+        public int ErrorCode { get; private set; }
 
-        public int RequestId { get; }
+        public int RequestId { get; private set; }
 
-        public Exception Exception { get; }
+        public Exception Exception { get; private set; }
 
         public override string ToString()
         {

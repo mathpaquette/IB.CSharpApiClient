@@ -5,7 +5,7 @@ namespace IB.CSharpApiClient.Events
 {
     public class CommissionReportEventArgs : EventArgs
     {
-        public CommissionReport CommissionReport { get; set; }
+        public CommissionReport CommissionReport { get; private set; }
 
         public CommissionReportEventArgs(CommissionReport commissionReport)
         {

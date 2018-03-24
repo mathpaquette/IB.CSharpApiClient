@@ -11,7 +11,7 @@ namespace IB.CSharpApiClient.Events
             Attribs = attribs;
         }
 
-        public TickAttrib Attribs { get; }
-        public double Price { get; }
+        public TickAttrib Attribs { get; private set; }
+        public double Price { get; private set; }
     }
 }

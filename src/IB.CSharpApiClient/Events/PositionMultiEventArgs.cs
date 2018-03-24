@@ -5,13 +5,6 @@ namespace IB.CSharpApiClient.Events
 {
     public class PositionMultiEventArgs : EventArgs
     {
-        private int reqId;
-        private string account;
-        private string modelCode;
-        private Contract contract;
-        private double position;
-        private double averageCost;
-        
         public PositionMultiEventArgs(int reqId, string account, string modelCode, Contract contract, double pos, double avgCost)
         {
             ReqId = reqId;
@@ -22,40 +15,16 @@ namespace IB.CSharpApiClient.Events
             AverageCost = avgCost;
         }
 
-        public int ReqId
-        {
-            get { return reqId; }
-            set { reqId = value; }
-        }
+        public int ReqId { get; private set; }
 
-        public string Account
-        {
-            get { return account; }
-            set { account = value; }
-        }
+        public string Account { get; private set; }
 
-        public string ModelCode
-        {
-            get { return modelCode; }
-            set { modelCode = value; }
-        }
+        public string ModelCode { get; private set; }
 
-        public Contract Contract
-        {
-            get { return contract; }
-            set { contract = value; }
-        }
+        public Contract Contract { get; private set; }
 
-        public double Position
-        {
-            get { return position; }
-            set { position = value; }
-        }
-        
-        public double AverageCost
-        {
-            get { return averageCost; }
-            set { averageCost = value; }
-        }
+        public double Position { get; private set; }
+
+        public double AverageCost { get; private set; }
     }
 }
