@@ -4,11 +4,16 @@ namespace IB.CSharpApiClient.Events
 {
     public class HistoricalTickBidAskEndEventArgs : EventArgs
     {
-        public int ReqId { get; private set; }
-
         public HistoricalTickBidAskEndEventArgs(int reqId)
         {
             ReqId = reqId;
+        }
+
+        public int ReqId { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ReqId)}: {ReqId}";
         }
     }
 }

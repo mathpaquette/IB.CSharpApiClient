@@ -4,11 +4,16 @@ namespace IB.CSharpApiClient.Events
 {
     public abstract class OrderEventArgs : EventArgs
     {
-        public int OrderId { get; private set; }
-
         protected OrderEventArgs(int orderId)
         {
             OrderId = orderId;
+        }
+
+        public int OrderId { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(OrderId)}: {OrderId}";
         }
     }
 }

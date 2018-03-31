@@ -11,7 +11,13 @@ namespace IB.CSharpApiClient.Events
             Attribs = attribs;
         }
 
-        public TickAttrib Attribs { get; private set; }
-        public double Price { get; private set; }
+        public double Price { get; }
+
+        public TickAttrib Attribs { get; }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(Attribs)}: {Attribs}, {nameof(Price)}: {Price}";
+        }
     }
 }

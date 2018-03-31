@@ -5,7 +5,8 @@ namespace IB.CSharpApiClient.Events
 {
     public class UpdatePortfolioEventArgs : EventArgs
     {
-        public UpdatePortfolioEventArgs(Contract contract, double position, double marketPrice, double marketValue, double averageCost, double unrealizedPNL, double realizedPNL, string accountName)
+        public UpdatePortfolioEventArgs(Contract contract, double position, double marketPrice, double marketValue,
+            double averageCost, double unrealizedPNL, double realizedPNL, string accountName)
         {
             Contract = contract;
             Position = position;
@@ -17,20 +18,18 @@ namespace IB.CSharpApiClient.Events
             AccountName = accountName;
         }
 
-        public Contract Contract { get; private set; }
+        public Contract Contract { get; }
+        public double Position { get; }
+        public double MarketPrice { get; }
+        public double MarketValue { get; }
+        public double AverageCost { get; }
+        public double UnrealizedPNL { get; }
+        public double RealizedPNL { get; }
+        public string AccountName { get; }
 
-        public double Position { get; private set; }
-
-        public double MarketPrice { get; private set; }
-
-        public double MarketValue { get; private set; }
-
-        public double AverageCost { get; private set; }
-
-        public double UnrealizedPNL { get; private set; }
-
-        public double RealizedPNL { get; private set; }
-
-        public string AccountName { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(AccountName)}: {AccountName}, {nameof(AverageCost)}: {AverageCost}, {nameof(Contract)}: {Contract}, {nameof(MarketPrice)}: {MarketPrice}, {nameof(MarketValue)}: {MarketValue}, {nameof(Position)}: {Position}, {nameof(RealizedPNL)}: {RealizedPNL}, {nameof(UnrealizedPNL)}: {UnrealizedPNL}";
+        }
     }
 }

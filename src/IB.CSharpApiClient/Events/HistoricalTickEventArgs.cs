@@ -4,17 +4,22 @@ namespace IB.CSharpApiClient.Events
 {
     public class HistoricalTickEventArgs : EventArgs
     {
-        public int ReqId { get; private set; }
-        public long Time { get; private set; }
-        public double Price { get; private set; }
-        public long Size { get; private set; }
-
         public HistoricalTickEventArgs(int reqId, long time, double price, long size)
         {
             ReqId = reqId;
             Time = time;
             Price = price;
             Size = size;
+        }
+
+        public int ReqId { get; }
+        public long Time { get; }
+        public double Price { get; }
+        public long Size { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ReqId)}: {ReqId}, {nameof(Time)}: {Time}, {nameof(Price)}: {Price}, {nameof(Size)}: {Size}";
         }
     }
 }

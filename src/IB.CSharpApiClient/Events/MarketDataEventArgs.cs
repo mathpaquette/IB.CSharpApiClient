@@ -10,8 +10,12 @@ namespace IB.CSharpApiClient.Events
             Field = field;
         }
 
-        public int RequestId { get; private set; }
+        public int RequestId { get; }
+        public int Field { get; }
 
-        public int Field { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(Field)}: {Field}";
+        }
     }
 }

@@ -15,18 +15,17 @@ namespace IB.CSharpApiClient.Events
             MarketMaker = marketMaker;
         }
 
-        public int RequestId { get; private set; }
+        public int RequestId { get; }
+        public int Position { get; }
+        public int Operation { get; }
+        public int Side { get; }
+        public double Price { get; }
+        public int Size { get; }
+        public string MarketMaker { get; }
 
-        public int Position { get; private set; }
-
-        public int Operation { get; private set; }
-
-        public int Side { get; private set; }
-
-        public double Price { get; private set; }
-
-        public int Size { get; private set; }
-
-        public string MarketMaker { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(Position)}: {Position}, {nameof(Operation)}: {Operation}, {nameof(Side)}: {Side}, {nameof(Price)}: {Price}, {nameof(Size)}: {Size}, {nameof(MarketMaker)}: {MarketMaker}";
+        }
     }
 }

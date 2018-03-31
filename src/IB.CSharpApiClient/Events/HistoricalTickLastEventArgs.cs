@@ -4,14 +4,6 @@ namespace IB.CSharpApiClient.Events
 {
     public class HistoricalTickLastEventArgs : EventArgs
     {
-        public int ReqId { get; private set; }
-        public long Time { get; private set; }
-        public int Mask { get; private set; }
-        public double Price { get; private set; }
-        public long Size { get; private set; }
-        public string Exchange { get; private set; }
-        public string SpecialConditions { get; private set; }
-
         public HistoricalTickLastEventArgs(int reqId, long time, int mask, double price, long size, string exchange, string specialConditions)
         {
             ReqId = reqId;
@@ -21,6 +13,19 @@ namespace IB.CSharpApiClient.Events
             Size = size;
             Exchange = exchange;
             SpecialConditions = specialConditions;
+        }
+
+        public int ReqId { get; }
+        public long Time { get; }
+        public int Mask { get; }
+        public double Price { get; }
+        public long Size { get; }
+        public string Exchange { get; }
+        public string SpecialConditions { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ReqId)}: {ReqId}, {nameof(Time)}: {Time}, {nameof(Mask)}: {Mask}, {nameof(Price)}: {Price}, {nameof(Size)}: {Size}, {nameof(Exchange)}: {Exchange}, {nameof(SpecialConditions)}: {SpecialConditions}";
         }
     }
 }

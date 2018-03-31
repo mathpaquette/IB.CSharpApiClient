@@ -5,24 +5,6 @@ namespace IB.CSharpApiClient.Events
 {
     public class HistoricalDataEventArgs : EventArgs
     {
-        public int RequestId { get; private set; }
-
-        public string Date { get; private set; }
-
-        public double Open { get; private set; }
-
-        public double High { get; private set; }
-
-        public double Low { get; private set; }
-
-        public double Close { get; private set; }
-
-        public long Volume { get; private set; }
-
-        public int Count { get; private set; }
-
-        public double Wap { get; private set; }
-
         public HistoricalDataEventArgs(int reqId, Bar bar)
         {
             RequestId = reqId;
@@ -34,6 +16,21 @@ namespace IB.CSharpApiClient.Events
             Volume = bar.Volume;
             Count = bar.Count;
             Wap = bar.WAP;
+        }
+
+        public int RequestId { get; }
+        public string Date { get; }
+        public double Open { get; }
+        public double High { get; }
+        public double Low { get; }
+        public double Close { get; }
+        public long Volume { get; }
+        public int Count { get; }
+        public double Wap { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(Date)}: {Date}, {nameof(Open)}: {Open}, {nameof(High)}: {High}, {nameof(Low)}: {Low}, {nameof(Close)}: {Close}, {nameof(Volume)}: {Volume}, {nameof(Count)}: {Count}, {nameof(Wap)}: {Wap}";
         }
     }
 }

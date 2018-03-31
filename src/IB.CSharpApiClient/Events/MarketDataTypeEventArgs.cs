@@ -10,8 +10,12 @@ namespace IB.CSharpApiClient.Events
             MarketDataType = marketDataType;
         }
 
-        public int RequestId { get; private set; }
+        public int RequestId { get; }
+        public int MarketDataType { get; }
 
-        public int MarketDataType { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(MarketDataType)}: {MarketDataType}";
+        }
     }
 }

@@ -11,7 +11,12 @@ namespace IB.CSharpApiClient.Events
             UnderComp = underComp;
         }
 
-        public int ReqId { get; private set; }
-        public UnderComp UnderComp { get; private set; }
+        public int ReqId { get; }
+        public UnderComp UnderComp { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ReqId)}: {ReqId}, {nameof(UnderComp)}: {UnderComp}";
+        }
     }
 }

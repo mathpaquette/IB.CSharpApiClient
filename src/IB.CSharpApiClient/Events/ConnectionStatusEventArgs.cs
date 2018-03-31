@@ -4,13 +4,18 @@ namespace IB.CSharpApiClient.Events
 {
     public class ConnectionStatusEventArgs : EventArgs
     {
-        public bool IsConnected { get; private set; }
-        public int NextValidOrderId { get; private set; }
-
         public ConnectionStatusEventArgs(bool isConnected, int orderId)
         {
             IsConnected = isConnected;
             NextValidOrderId = orderId;
+        }
+
+        public bool IsConnected { get; }
+        public int NextValidOrderId { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(IsConnected)}: {IsConnected}, {nameof(NextValidOrderId)}: {NextValidOrderId}";
         }
     }
 }

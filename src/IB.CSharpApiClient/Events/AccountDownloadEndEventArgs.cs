@@ -9,6 +9,11 @@ namespace IB.CSharpApiClient.Events
             Account = account;
         }
 
-        public string Account { get; private set; }
+        public string Account { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(Account)}: {Account}";
+        }
     }
 }

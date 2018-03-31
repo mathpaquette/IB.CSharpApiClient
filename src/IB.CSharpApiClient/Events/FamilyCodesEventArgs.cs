@@ -5,11 +5,16 @@ namespace IB.CSharpApiClient.Events
 {
     public class FamilyCodesEventArgs : EventArgs
     {
-        public FamilyCode[] FamilyCodes { get; private set; }
-
         public FamilyCodesEventArgs(FamilyCode[] familyCodes)
         {
-            this.FamilyCodes = familyCodes;
+            FamilyCodes = familyCodes;
+        }
+
+        public FamilyCode[] FamilyCodes { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(FamilyCodes)}: {FamilyCodes}";
         }
     }
 }

@@ -4,13 +4,18 @@ namespace IB.CSharpApiClient.Events
 {
     public class FundamentalsEventArgs : EventArgs
     {
-        public int RequestId { get; private set; }
-        public string Data { get; private set; }
-
         public FundamentalsEventArgs(int requestId, string data)
         {
             RequestId = requestId;
             Data = data;
+        }
+
+        public int RequestId { get; }
+        public string Data { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(Data)}: {Data}";
         }
     }
 }

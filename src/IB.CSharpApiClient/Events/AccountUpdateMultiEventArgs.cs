@@ -4,7 +4,8 @@ namespace IB.CSharpApiClient.Events
 {
     public class AccountUpdateMultiEventArgs : EventArgs
     {
-        public AccountUpdateMultiEventArgs(int reqId, string account, string modelCode, string key, string value, string currency)
+        public AccountUpdateMultiEventArgs(int reqId, string account, string modelCode, string key, string value,
+            string currency)
         {
             ReqId = reqId;
             Account = account;
@@ -14,16 +15,16 @@ namespace IB.CSharpApiClient.Events
             Currency = currency;
         }
 
-        public int ReqId { get; private set; }
+        public int ReqId { get; }
+        public string Account { get; }
+        public string ModelCode { get; }
+        public string Key { get; }
+        public string Value { get; }
+        public string Currency { get; }
 
-        public string Account { get; private set; }
-
-        public string ModelCode { get; private set; }
-
-        public string Key { get; private set; }
-
-        public string Value { get; private set; }
-
-        public string Currency { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(ReqId)}: {ReqId}, {nameof(Account)}: {Account}, {nameof(ModelCode)}: {ModelCode}, {nameof(Key)}: {Key}, {nameof(Value)}: {Value}, {nameof(Currency)}: {Currency}";
+        }
     }
 }

@@ -6,9 +6,9 @@ namespace IB.CSharpApiClient.Events
     {
         public ErrorEventArgs(int requestId, int errorCode, string message)
         {
-            Message = message;
             RequestId = requestId;
             ErrorCode = errorCode;
+            Message = message;
         }
 
         public ErrorEventArgs(Exception exception)
@@ -21,17 +21,14 @@ namespace IB.CSharpApiClient.Events
             Message = message;
         }
 
-        public string Message { get; private set; }
-
-        public int ErrorCode { get; private set; }
-
-        public int RequestId { get; private set; }
-
-        public Exception Exception { get; private set; }
+        public int RequestId { get; }
+        public int ErrorCode { get; }
+        public string Message { get; }
+        public Exception Exception { get; }
 
         public override string ToString()
         {
-            return "Error. Request: " + RequestId + ", Code: " + ErrorCode + " - " + Message;
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(ErrorCode)}: {ErrorCode}, {nameof(Message)}: {Message}, {nameof(Exception)}: {Exception}";
         }
     }
 }

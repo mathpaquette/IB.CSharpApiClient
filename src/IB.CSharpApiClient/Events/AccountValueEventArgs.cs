@@ -12,12 +12,14 @@ namespace IB.CSharpApiClient.Events
             AccountName = accountName;
         }
 
-        public string Key { get; private set; }
+        public string Key { get; }
+        public string Value { get; }
+        public string Currency { get; }
+        public string AccountName { get; }
 
-        public string Value { get; private set; }
-
-        public string Currency { get; private set; }
-
-        public string AccountName { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(Key)}: {Key}, {nameof(Value)}: {Value}, {nameof(Currency)}: {Currency}, {nameof(AccountName)}: {AccountName}";
+        }
     }
 }

@@ -16,20 +16,17 @@ namespace IB.CSharpApiClient.Events
             LegsStr = legsStr;
         }
 
-        public int RequestId { get; private set; }
+        public int RequestId { get; }
+        public int Rank { get; }
+        public ContractDetails ContractDetails { get; }
+        public string Distance { get; }
+        public string Benchmark { get; }
+        public string Projection { get; }
+        public string LegsStr { get; }
 
-        public int Rank { get; private set; }
-
-        public ContractDetails ContractDetails { get; private set; }
-
-        public string Distance { get; private set; }
-
-        public string Benchmark { get; private set; }
-
-
-        public string Projection { get; private set; }
-
-
-        public string LegsStr { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(Benchmark)}: {Benchmark}, {nameof(ContractDetails)}: {ContractDetails}, {nameof(Distance)}: {Distance}, {nameof(LegsStr)}: {LegsStr}, {nameof(Projection)}: {Projection}, {nameof(Rank)}: {Rank}, {nameof(RequestId)}: {RequestId}";
+        }
     }
 }

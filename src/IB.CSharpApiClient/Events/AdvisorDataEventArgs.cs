@@ -10,8 +10,12 @@ namespace IB.CSharpApiClient.Events
             Data = data;
         }
 
-        public int FaDataType { get; private set; }
+        public int FaDataType { get; }
+        public string Data { get; }
 
-        public string Data { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(FaDataType)}: {FaDataType}, {nameof(Data)}: {Data}";
+        }
     }
 }

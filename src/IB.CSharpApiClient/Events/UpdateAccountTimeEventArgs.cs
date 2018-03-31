@@ -9,6 +9,11 @@ namespace IB.CSharpApiClient.Events
             Timestamp = timestamp;
         }
 
-        public string Timestamp { get; private set; }
+        public string Timestamp { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(Timestamp)}: {Timestamp}";
+        }
     }
 }

@@ -4,17 +4,20 @@ namespace IB.CSharpApiClient.Events
 {
     public class HistoricalDataEndEventArgs : EventArgs
     {
-        public string StartDate { get; private set; }
-
-        public int RequestId { get; private set; }
-
-        public string EndDate { get; private set; }
-
         public HistoricalDataEndEventArgs(int requestId, string startDate, string endDate)
         {
             RequestId = requestId;
             StartDate = startDate;
             EndDate = endDate;
+        }
+
+        public int RequestId { get; }
+        public string StartDate { get; }
+        public string EndDate { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(StartDate)}: {StartDate}, {nameof(EndDate)}: {EndDate}";
         }
     }
 }

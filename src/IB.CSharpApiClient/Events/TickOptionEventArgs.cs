@@ -2,7 +2,8 @@
 {
     public class TickOptionEventArgs : MarketDataEventArgs
     {
-        public TickOptionEventArgs(int requestId, int field, double impliedVolatility, double delta, double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice)
+        public TickOptionEventArgs(int requestId, int field, double impliedVolatility, double delta, double optPrice,
+            double pvDividend, double gamma, double vega, double theta, double undPrice)
             : base(requestId, field)
         {
             ImpliedVolatility = impliedVolatility;
@@ -15,13 +16,18 @@
             UndPrice = undPrice;
         }
 
-        public double ImpliedVolatility { get; private set; }
-        public double Delta { get; private set; }
-        public double OptPrice { get; private set; }
-        public double PvDividend { get; private set; }
-        public double Gamma { get; private set; }
-        public double Vega { get; private set; }
-        public double Theta { get; private set; }
-        public double UndPrice { get; private set; }
+        public double ImpliedVolatility { get; }
+        public double Delta { get; }
+        public double OptPrice { get; }
+        public double PvDividend { get; }
+        public double Gamma { get; }
+        public double Vega { get; }
+        public double Theta { get; }
+        public double UndPrice { get; }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(Delta)}: {Delta}, {nameof(Gamma)}: {Gamma}, {nameof(ImpliedVolatility)}: {ImpliedVolatility}, {nameof(OptPrice)}: {OptPrice}, {nameof(PvDividend)}: {PvDividend}, {nameof(Theta)}: {Theta}, {nameof(UndPrice)}: {UndPrice}, {nameof(Vega)}: {Vega}";
+        }
     }
 }

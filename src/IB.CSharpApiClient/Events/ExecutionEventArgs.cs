@@ -12,10 +12,13 @@ namespace IB.CSharpApiClient.Events
             Execution = execution;
         }
 
-        public Contract Contract { get; private set; }
+        public Contract Contract { get; }
+        public Execution Execution { get; }
+        public int ReqId { get; }
 
-        public Execution Execution { get; private set; }
-
-        public int ReqId { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(Contract)}: {Contract}, {nameof(Execution)}: {Execution}, {nameof(ReqId)}: {ReqId}";
+        }
     }
 }

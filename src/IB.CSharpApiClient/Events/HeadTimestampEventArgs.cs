@@ -4,13 +4,18 @@ namespace IB.CSharpApiClient.Events
 {
     public class HeadTimestampEventArgs : EventArgs
     {
-        public int ReqId { get; private set; }
-        public string HeadTimestamp { get; private set; }
-
         public HeadTimestampEventArgs(int reqId, string headTimestamp)
         {
-            this.ReqId = reqId;
-            this.HeadTimestamp = headTimestamp;
+            ReqId = reqId;
+            HeadTimestamp = headTimestamp;
+        }
+
+        public int ReqId { get; }
+        public string HeadTimestamp { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ReqId)}: {ReqId}, {nameof(HeadTimestamp)}: {HeadTimestamp}";
         }
     }
 }

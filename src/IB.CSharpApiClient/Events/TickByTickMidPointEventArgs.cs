@@ -11,8 +11,13 @@ namespace IB.CSharpApiClient.Events
             MidPoint = midPoint;
         }
 
-        public int ReqId { get; private set; }
-        public long Time { get; private set; }
-        public double MidPoint { get; private set; }
+        public int ReqId { get; }
+        public long Time { get; }
+        public double MidPoint { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(MidPoint)}: {MidPoint}, {nameof(ReqId)}: {ReqId}, {nameof(Time)}: {Time}";
+        }
     }
 }

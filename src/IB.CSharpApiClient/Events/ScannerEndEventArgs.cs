@@ -6,9 +6,14 @@ namespace IB.CSharpApiClient.Events
     {
         public ScannerEndEventArgs(int requestId)
         {
-             RequestId = requestId;
+            RequestId = requestId;
         }
 
-        public int RequestId { get; private set; }
+        public int RequestId { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}";
+        }
     }
 }

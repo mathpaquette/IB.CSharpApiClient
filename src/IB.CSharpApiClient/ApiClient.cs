@@ -6,7 +6,7 @@ using IBApi;
 
 namespace IB.CSharpApiClient
 {
-    public abstract class ApiClient : IApiClient
+    public abstract class ApiClient
     {
         private readonly EReaderSignal _readerMonitorSignal;
 
@@ -66,7 +66,7 @@ namespace IB.CSharpApiClient
         {
             var ct = new CancellationTokenSource(DefaultTimeoutMs);
             var res = new TaskCompletionSource<object>();
-            ct.Token.Register(() => res.TrySetCanceled(), useSynchronizationContext: false);
+            ct.Token.Register(() => res.TrySetCanceled(), false);
 
             EventHandler connectAck = (sender, args) =>
             {

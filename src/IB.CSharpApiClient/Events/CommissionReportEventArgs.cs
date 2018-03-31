@@ -5,11 +5,16 @@ namespace IB.CSharpApiClient.Events
 {
     public class CommissionReportEventArgs : EventArgs
     {
-        public CommissionReport CommissionReport { get; private set; }
-
         public CommissionReportEventArgs(CommissionReport commissionReport)
         {
             CommissionReport = commissionReport;
+        }
+
+        public CommissionReport CommissionReport { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(CommissionReport)}: {CommissionReport}";
         }
     }
 }

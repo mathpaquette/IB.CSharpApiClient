@@ -4,13 +4,18 @@ namespace IB.CSharpApiClient.Events
 {
     public class HistoricalNewsEndEventArgs : EventArgs
     {
-        public int RequestId { get; private set; }
-        public bool HasMore { get; private set; }
-
         public HistoricalNewsEndEventArgs(int requestId, bool hasMore)
         {
-            this.RequestId = requestId;
-            this.HasMore = hasMore;
+            RequestId = requestId;
+            HasMore = hasMore;
+        }
+
+        public int RequestId { get; }
+        public bool HasMore { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(HasMore)}: {HasMore}";
         }
     }
 }

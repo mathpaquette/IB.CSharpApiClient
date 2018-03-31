@@ -9,6 +9,11 @@ namespace IB.CSharpApiClient.Events
             XmlData = data;
         }
 
-        public string XmlData { get; private set; }
+        public string XmlData { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(XmlData)}: {XmlData}";
+        }
     }
 }

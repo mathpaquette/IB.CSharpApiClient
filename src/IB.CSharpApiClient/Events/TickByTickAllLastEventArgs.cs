@@ -5,7 +5,8 @@ namespace IB.CSharpApiClient.Events
 {
     public class TickByTickAllLastEventArgs : EventArgs
     {
-        public TickByTickAllLastEventArgs(int reqId, int tickType, long time, double price, long size, TickAttrib attribs, string exchange, string specialConditions)
+        public TickByTickAllLastEventArgs(int reqId, int tickType, long time, double price, long size,
+            TickAttrib attribs, string exchange, string specialConditions)
         {
             ReqId = reqId;
             TickType = tickType;
@@ -17,13 +18,18 @@ namespace IB.CSharpApiClient.Events
             SpecialConditions = specialConditions;
         }
 
-        public int ReqId { get; private set; }
-        public int TickType { get; private set; }
-        public long Time { get; private set; }
-        public double Price { get; private set; }
-        public long Size { get; private set; }
-        public TickAttrib Attribs { get; private set; }
-        public string Exchange { get; private set; }
-        public string SpecialConditions { get; private set; }
+        public int ReqId { get; }
+        public int TickType { get; }
+        public long Time { get; }
+        public double Price { get; }
+        public long Size { get; }
+        public TickAttrib Attribs { get; }
+        public string Exchange { get; }
+        public string SpecialConditions { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(Attribs)}: {Attribs}, {nameof(Exchange)}: {Exchange}, {nameof(Price)}: {Price}, {nameof(ReqId)}: {ReqId}, {nameof(Size)}: {Size}, {nameof(SpecialConditions)}: {SpecialConditions}, {nameof(TickType)}: {TickType}, {nameof(Time)}: {Time}";
+        }
     }
 }

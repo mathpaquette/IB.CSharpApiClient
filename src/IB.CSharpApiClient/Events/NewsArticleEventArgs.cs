@@ -4,15 +4,20 @@ namespace IB.CSharpApiClient.Events
 {
     public class NewsArticleEventArgs : EventArgs
     {
-        public int RequestId { get; private set; }
-        public int ArticleType { get; private set; }
-        public string ArticleText { get; private set; }
-
         public NewsArticleEventArgs(int requestId, int articleType, string articleText)
         {
-            this.RequestId = requestId;
-            this.ArticleType = articleType;
-            this.ArticleText = articleText;
+            RequestId = requestId;
+            ArticleType = articleType;
+            ArticleText = articleText;
+        }
+
+        public int RequestId { get; }
+        public int ArticleType { get; }
+        public string ArticleText { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(ArticleType)}: {ArticleType}, {nameof(ArticleText)}: {ArticleText}";
         }
     }
 }

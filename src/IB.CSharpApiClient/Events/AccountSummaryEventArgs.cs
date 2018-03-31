@@ -4,16 +4,6 @@ namespace IB.CSharpApiClient.Events
 {
     public class AccountSummaryEventArgs : EventArgs
     {
-        public int RequestId { get; private set; }
-
-        public string Account { get; private set; }
-
-        public string Tag { get; private set; }
-
-        public string Value { get; private set; }
-
-        public string Currency { get; private set; }
-
         public AccountSummaryEventArgs(int requestId, string account, string tag, string value, string currency)
         {
             RequestId = requestId;
@@ -21,6 +11,17 @@ namespace IB.CSharpApiClient.Events
             Tag = tag;
             Value = value;
             Currency = currency;
+        }
+
+        public int RequestId { get; }
+        public string Account { get; }
+        public string Tag { get; }
+        public string Value { get; }
+        public string Currency { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(Account)}: {Account}, {nameof(Tag)}: {Tag}, {nameof(Value)}: {Value}, {nameof(Currency)}: {Currency}";
         }
     }
 }

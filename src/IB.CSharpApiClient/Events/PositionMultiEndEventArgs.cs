@@ -9,6 +9,11 @@ namespace IB.CSharpApiClient.Events
             ReqId = reqId;
         }
 
-        public int ReqId { get; private set; }
+        public int ReqId { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ReqId)}: {ReqId}";
+        }
     }
 }

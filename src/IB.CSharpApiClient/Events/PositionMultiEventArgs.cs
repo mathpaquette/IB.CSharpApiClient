@@ -15,16 +15,16 @@ namespace IB.CSharpApiClient.Events
             AverageCost = avgCost;
         }
 
-        public int ReqId { get; private set; }
+        public int ReqId { get; }
+        public string Account { get; }
+        public string ModelCode { get; }
+        public Contract Contract { get; }
+        public double Position { get; }
+        public double AverageCost { get; }
 
-        public string Account { get; private set; }
-
-        public string ModelCode { get; private set; }
-
-        public Contract Contract { get; private set; }
-
-        public double Position { get; private set; }
-
-        public double AverageCost { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(Account)}: {Account}, {nameof(AverageCost)}: {AverageCost}, {nameof(Contract)}: {Contract}, {nameof(ModelCode)}: {ModelCode}, {nameof(Position)}: {Position}, {nameof(ReqId)}: {ReqId}";
+        }
     }
 }

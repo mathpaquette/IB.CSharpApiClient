@@ -7,6 +7,11 @@
             Value = value;
         }
 
-        public double Value { get; private set; }
+        public double Value { get; }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(Value)}: {Value}";
+        }
     }
 }

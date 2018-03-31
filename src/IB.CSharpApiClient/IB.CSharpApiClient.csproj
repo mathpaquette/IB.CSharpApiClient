@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IB.CSharpApi, Version=9.73.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IB.CSharpApi.9.73.6-build59\lib\net45\IB.CSharpApi.dll</HintPath>
+    <Reference Include="IB.CSharpApi, Version=9.73.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IB.CSharpApi.9.73.7\lib\net45\IB.CSharpApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -125,7 +125,6 @@
     <Compile Include="Events\UpdateAccountTimeEventArgs.cs" />
     <Compile Include="Events\UpdatePortfolioEventArgs.cs" />
     <Compile Include="GenericTick.cs" />
-    <Compile Include="IApiClient.cs" />
     <Compile Include="IApiClientAsync.cs" />
     <Compile Include="IApiEvent.cs" />
     <Compile Include="IApiEventDispatcher.cs" />
@@ -135,6 +134,5 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

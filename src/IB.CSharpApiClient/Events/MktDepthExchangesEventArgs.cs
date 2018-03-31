@@ -1,14 +1,20 @@
 ﻿using System;
+using IBApi;
 
 namespace IB.CSharpApiClient.Events
 {
     public class MktDepthExchangesEventArgs : EventArgs
     {
-        public IBApi.DepthMktDataDescription[] Descriptions { get; private set; }
-
-        public MktDepthExchangesEventArgs(IBApi.DepthMktDataDescription[] descriptions)
+        public MktDepthExchangesEventArgs(DepthMktDataDescription[] descriptions)
         {
-            this.Descriptions = descriptions;
+            Descriptions = descriptions;
+        }
+
+        public DepthMktDataDescription[] Descriptions { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(Descriptions)}: {Descriptions}";
         }
     }
 }

@@ -2,19 +2,8 @@
 {
     public class OrderStatusEventArgs : OrderEventArgs
     {
-        public string Status { get; private set; }
-        public double Filled { get; private set; }
-        public double Remaining { get; private set; }
-        public double AvgFillPrice { get; private set; }
-        public int PermId { get; private set; }
-        public int ParentId { get; private set; }
-        public double LastFillPrice { get; private set; }
-        public int ClientId { get; private set; }
-        public string WhyHeld { get; private set; }
-        public double MktCapPrice { get; private set; }
-
         public OrderStatusEventArgs(int orderId, string status, double filled, double remaining, double avgFillPrice,
-           int permId, int parentId, double lastFillPrice, int clientId, string whyHeld, double mktCapPrice)
+            int permId, int parentId, double lastFillPrice, int clientId, string whyHeld, double mktCapPrice)
             : base(orderId)
         {
             Status = status;
@@ -27,6 +16,22 @@
             ClientId = clientId;
             WhyHeld = whyHeld;
             MktCapPrice = mktCapPrice;
+        }
+
+        public string Status { get; }
+        public double Filled { get; }
+        public double Remaining { get; }
+        public double AvgFillPrice { get; }
+        public int PermId { get; }
+        public int ParentId { get; }
+        public double LastFillPrice { get; }
+        public int ClientId { get; }
+        public string WhyHeld { get; }
+        public double MktCapPrice { get; }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, {nameof(AvgFillPrice)}: {AvgFillPrice}, {nameof(ClientId)}: {ClientId}, {nameof(Filled)}: {Filled}, {nameof(LastFillPrice)}: {LastFillPrice}, {nameof(MktCapPrice)}: {MktCapPrice}, {nameof(ParentId)}: {ParentId}, {nameof(PermId)}: {PermId}, {nameof(Remaining)}: {Remaining}, {nameof(Status)}: {Status}, {nameof(WhyHeld)}: {WhyHeld}";
         }
     }
 }

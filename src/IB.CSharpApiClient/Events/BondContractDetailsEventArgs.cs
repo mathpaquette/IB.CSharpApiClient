@@ -11,8 +11,12 @@ namespace IB.CSharpApiClient.Events
             ContractDetails = contractDetails;
         }
 
-        public ContractDetails ContractDetails { get; private set; }
+        public int RequestId { get; }
+        public ContractDetails ContractDetails { get; }
 
-        public int RequestId { get; private set; }
+        public override string ToString()
+        {
+            return $"{nameof(RequestId)}: {RequestId}, {nameof(ContractDetails)}: {ContractDetails}";
+        }
     }
 }

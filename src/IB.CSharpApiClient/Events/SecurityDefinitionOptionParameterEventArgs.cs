@@ -5,23 +5,29 @@ namespace IB.CSharpApiClient.Events
 {
     public class SecurityDefinitionOptionParameterEventArgs : EventArgs
     {
-        public int ReqId { get; private set; }
-        public string Exchange { get; private set; }
-        public int UnderlyingConId { get; private set; }
-        public string TradingClass { get; private set; }
-        public string Multiplier { get; private set; }
-        public HashSet<string> Expirations { get; private set; }
-        public HashSet<double> Strikes { get; private set; }
-
-        public SecurityDefinitionOptionParameterEventArgs(int reqId, string exchange, int underlyingConId, string tradingClass, string multiplier, HashSet<string> expirations, HashSet<double> strikes)
+        public SecurityDefinitionOptionParameterEventArgs(int reqId, string exchange, int underlyingConId,
+            string tradingClass, string multiplier, HashSet<string> expirations, HashSet<double> strikes)
         {
-            this.ReqId = reqId;
-            this.Exchange = exchange;
-            this.UnderlyingConId = underlyingConId;
-            this.TradingClass = tradingClass;
-            this.Multiplier = multiplier;
-            this.Expirations = expirations;
-            this.Strikes = strikes;
+            ReqId = reqId;
+            Exchange = exchange;
+            UnderlyingConId = underlyingConId;
+            TradingClass = tradingClass;
+            Multiplier = multiplier;
+            Expirations = expirations;
+            Strikes = strikes;
+        }
+
+        public int ReqId { get; }
+        public string Exchange { get; }
+        public int UnderlyingConId { get; }
+        public string TradingClass { get; }
+        public string Multiplier { get; }
+        public HashSet<string> Expirations { get; }
+        public HashSet<double> Strikes { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(Exchange)}: {Exchange}, {nameof(Expirations)}: {Expirations}, {nameof(Multiplier)}: {Multiplier}, {nameof(ReqId)}: {ReqId}, {nameof(Strikes)}: {Strikes}, {nameof(TradingClass)}: {TradingClass}, {nameof(UnderlyingConId)}: {UnderlyingConId}";
         }
     }
 }

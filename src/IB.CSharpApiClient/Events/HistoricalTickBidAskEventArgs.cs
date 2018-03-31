@@ -4,14 +4,6 @@ namespace IB.CSharpApiClient.Events
 {
     public class HistoricalTickBidAskEventArgs : EventArgs
     {
-        public int ReqId { get; private set; }
-        public long Time { get; private set; }
-        public int Mask { get; private set; }
-        public double PriceBid { get; private set; }
-        public double PriceAsk { get; private set; }
-        public long SizeBid { get; private set; }
-        public long SizeAsk { get; private set; }
-
         public HistoricalTickBidAskEventArgs(int reqId, long time, int mask, double priceBid, double priceAsk, long sizeBid, long sizeAsk)
         {
             ReqId = reqId;
@@ -21,6 +13,19 @@ namespace IB.CSharpApiClient.Events
             PriceAsk = priceAsk;
             SizeBid = sizeBid;
             SizeAsk = sizeAsk;
+        }
+
+        public int ReqId { get; }
+        public long Time { get; }
+        public int Mask { get; }
+        public double PriceBid { get; }
+        public double PriceAsk { get; }
+        public long SizeBid { get; }
+        public long SizeAsk { get; }
+
+        public override string ToString()
+        {
+            return $"{nameof(ReqId)}: {ReqId}, {nameof(Time)}: {Time}, {nameof(Mask)}: {Mask}, {nameof(PriceBid)}: {PriceBid}, {nameof(PriceAsk)}: {PriceAsk}, {nameof(SizeBid)}: {SizeBid}, {nameof(SizeAsk)}: {SizeAsk}";
         }
     }
 }
