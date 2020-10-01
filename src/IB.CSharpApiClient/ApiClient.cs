@@ -6,6 +6,7 @@ using IBApi;
 
 namespace IB.CSharpApiClient
 {
+   //Setting up ApiClient
     public abstract class ApiClient
     {
         private readonly EReaderSignal _readerMonitorSignal;
@@ -34,7 +35,8 @@ namespace IB.CSharpApiClient
             EventDispatcher.ConnectAck += EventDispatcherOnConnectAck;
             EventDispatcher.ConnectionStatus += EventDispatcherOnConnectionStatus;
         }
-
+        
+        //connecting 
         public void Connect(string host, int port, int clientId)
         {
             try
@@ -60,8 +62,9 @@ namespace IB.CSharpApiClient
                 Console.WriteLine(e);
                 throw;
             }
-        }
-
+        }  
+        
+        //Syncing 
         public Task ConnectAsync(string host, int port, int clientId)
         {
             var ct = new CancellationTokenSource(DefaultTimeoutMs);
