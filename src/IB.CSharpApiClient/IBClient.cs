@@ -509,6 +509,12 @@ namespace IB.CSharpApiClient
             remove => _messageHandler.VerifyMessageAPI -= value;
         }
 
+        public event Action<ReplaceFAEndMessage> ReplaceFAEnd
+        {
+            add => _messageHandler.ReplaceFAEnd += value;
+            remove => _messageHandler.ReplaceFAEnd -= value;
+        }
+
         #endregion
 
         private readonly EReaderSignal _readerSignal;
@@ -712,9 +718,9 @@ namespace IB.CSharpApiClient
             _clientSocket.placeOrder(id, contract, order);
         }
 
-        public void ReplaceFA(int faDataType, string xml)
+        public void ReplaceFA(int reqId, int faDataType, string xml)
         {
-            _clientSocket.replaceFA(faDataType, xml);
+            _clientSocket.replaceFA(reqId, faDataType, xml);
         }
 
         public void RequestFA(int faDataType)

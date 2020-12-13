@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IB.CSharpApiClient", "src\I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpAPI", "packages\client\CSharpAPI.csproj", "{D4095C13-0FD7-47AC-9729-5A83BB2666BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IB.CSharpApiClient.Tests", "src\IB.CSharpApiClient.Tests\IB.CSharpApiClient.Tests.csproj", "{19CB50FA-7E28-4BFA-B913-3C608905B4C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IB.CSharpApiClient.Tests.Integration", "src\IB.CSharpApiClient.Tests.Integration\IB.CSharpApiClient.Tests.Integration.csproj", "{23B623BA-F5EA-4423-B7A0-1BC1D9E85C70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{D4095C13-0FD7-47AC-9729-5A83BB2666BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4095C13-0FD7-47AC-9729-5A83BB2666BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4095C13-0FD7-47AC-9729-5A83BB2666BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19CB50FA-7E28-4BFA-B913-3C608905B4C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19CB50FA-7E28-4BFA-B913-3C608905B4C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19CB50FA-7E28-4BFA-B913-3C608905B4C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19CB50FA-7E28-4BFA-B913-3C608905B4C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23B623BA-F5EA-4423-B7A0-1BC1D9E85C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23B623BA-F5EA-4423-B7A0-1BC1D9E85C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B623BA-F5EA-4423-B7A0-1BC1D9E85C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23B623BA-F5EA-4423-B7A0-1BC1D9E85C70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

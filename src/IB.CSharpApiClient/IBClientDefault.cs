@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpAPIClient
+namespace IB.CSharpApiClient
 {
     public class IBClientDefault
     {

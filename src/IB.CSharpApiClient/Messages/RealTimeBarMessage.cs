@@ -1,4 +1,5 @@
 ﻿using System;
+using IBApi;
 
 namespace IB.CSharpApiClient.Messages
 {
@@ -8,7 +9,7 @@ namespace IB.CSharpApiClient.Messages
         public long Timestamp { get; private set; }
 
         public RealTimeBarMessage(int reqId, long date, double open, double high, double low, double close, long volume, double WAP, int count)
-            : base(reqId, new IBApi.Bar(UnixTimestampToDateTime(date).ToString("yyyyMMdd hh:mm:ss"), open, high, low, close, -1, count, WAP))
+            : base(reqId, new Bar(UnixTimestampToDateTime(date).ToString("yyyyMMdd hh:mm:ss"), open, high, low, close, -1, count, WAP))
         {
             Timestamp = date;
             LongVolume = volume;

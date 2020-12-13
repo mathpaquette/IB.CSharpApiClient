@@ -4,6 +4,7 @@
     {
         public int TickerId { get; private set; }
         public int Field { get; private set; }
+        public int TickAttribute { get; private set; }
         public double ImpliedVolatility { get; private set; }
         public double Delta { get; private set; }
         public double OptPrice { get; private set; }
@@ -13,10 +14,11 @@
         public double Theta { get; private set; }
         public double UndPrice { get; private set; }
 
-        public TickOptionComputationMessage(int tickerId, int field, double impliedVolatility, double delta, double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice)
+        public TickOptionComputationMessage(int tickerId, int field, int tickAttribute, double impliedVolatility, double delta, double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice)
         {
             TickerId = tickerId;
             Field = field;
+            TickAttribute = tickAttribute;
             ImpliedVolatility = impliedVolatility;
             Delta = delta;
             OptPrice = optPrice;

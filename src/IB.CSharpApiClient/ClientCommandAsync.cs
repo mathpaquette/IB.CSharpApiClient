@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CSharpAPIClient.Messages;
+using IB.CSharpApiClient.Messages;
 using IBApi;
 
-namespace CSharpAPIClient
+namespace IB.CSharpApiClient
 {
     public class ClientCommandAsync : IClientCommandAsync
     {

@@ -46,7 +46,7 @@ namespace IB.CSharpApiClient
         void CancelScannerSubscription(int tickerId);
         void ExerciseOptions(int tickerId, Contract contract, int exerciseAction, int exerciseQuantity, string account, int ovrd);
         void PlaceOrder(int id, Contract contract, Order order);
-        void ReplaceFA(int faDataType, string xml);
+        void ReplaceFA(int reqId, int faDataType, string xml);
         void RequestFA(int faDataType);
         void ReqAccountSummary(int reqId, string group, string tags);
         void ReqAccountUpdates(bool subscribe, string acctCode);
@@ -56,7 +56,7 @@ namespace IB.CSharpApiClient
         void ReqCurrentTime();
         void ReqExecutions(int reqId, ExecutionFilter filter);
 
-        void ReqFundamentalData(int reqId, Contract contract, String reportType,
+        void ReqFundamentalData(int reqId, Contract contract, string reportType,
             //reserved for future use, must be blank
             List<TagValue> fundamentalDataOptions);
 
@@ -95,7 +95,7 @@ namespace IB.CSharpApiClient
         void ReqFamilyCodes();
         void ReqMatchingSymbols(int reqId, string pattern);
         void ReqMktDepthExchanges();
-        void ReqSmartComponents(int reqId, String bboExchange);
+        void ReqSmartComponents(int reqId, string bboExchange);
         void ReqNewsProviders();
         void ReqNewsArticle(int requestId, string providerCode, string articleId, List<TagValue> newsArticleOptions);
         void ReqHistoricalNews(int requestId, int conId, string providerCodes, string startDateTime, string endDateTime, int totalResults, List<TagValue> historicalNewsOptions);

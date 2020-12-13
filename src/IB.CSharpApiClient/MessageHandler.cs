@@ -1,9 +1,9 @@
-﻿using IBApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using CSharpAPIClient.Messages;
+using IB.CSharpApiClient.Messages;
+using IBApi;
 
-namespace CSharpAPIClient
+namespace IB.CSharpApiClient
 {
     public class MessageHandler : IMessageHandler
     {
@@ -90,6 +90,7 @@ namespace CSharpAPIClient
         public event Action<VerifyAndAuthMessageAPIMessage> VerifyAndAuthMessageAPI;
         public event Action<VerifyCompletedMessage> VerifyCompleted;
         public event Action<VerifyMessageAPIMessage> VerifyMessageAPI;
+        public event Action<ReplaceFAEndMessage> ReplaceFAEnd;
 
         #region Handlers
         public void accountDownloadEnd(string account)
@@ -137,6 +138,11 @@ namespace CSharpAPIClient
             CompletedOrdersEnd?.Invoke();
         }
 
+        public void replaceFAEnd(int reqId, string text)
+        {
+            ReplaceFAEnd?.Invoke(new ReplaceFAEndMessage(reqId, text));
+        }
+
         public void connectAck()
         {
             ConnectAck?.Invoke();
@@ -165,6 +171,13 @@ namespace CSharpAPIClient
         public void deltaNeutralValidation(int reqId, DeltaNeutralContract deltaNeutralContract)
         {
             DeltaNeutralValidation?.Invoke(new DeltaNeutralValidationMessage(reqId, deltaNeutralContract));
+        }
+
+        public void tickOptionComputation(int tickerId, int field, int tickAttrib, double impliedVolatility, double delta,
+            double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice)
+        {
+
+            TickOptionComputation?.Invoke(new TickOptionComputationMessage(tickerId, field, tickAttrib, impliedVolatility, delta, optPrice, pvDividend, gamma, vega, theta, undPrice));
         }
 
         public void displayGroupList(int reqId, string groups)
@@ -435,11 +448,6 @@ namespace CSharpAPIClient
         public void tickNews(int tickerId, long timeStamp, string providerCode, string articleId, string headline, string extraData)
         {
             TickNews?.Invoke(new TickNewsMessage(tickerId, timeStamp, providerCode, articleId, headline, extraData));
-        }
-
-        public void tickOptionComputation(int tickerId, int field, double impliedVolatility, double delta, double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice)
-        {
-            TickOptionComputation?.Invoke(new TickOptionComputationMessage(tickerId, field, impliedVolatility, delta, optPrice, pvDividend, gamma, vega, theta, undPrice));
         }
 
         public void tickPrice(int tickerId, int field, double price, TickAttrib attribs)

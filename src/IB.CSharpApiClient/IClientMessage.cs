@@ -88,5 +88,6 @@ namespace IB.CSharpApiClient
         event Action<VerifyAndAuthMessageAPIMessage> VerifyAndAuthMessageAPI;
         event Action<VerifyCompletedMessage> VerifyCompleted;
         event Action<VerifyMessageAPIMessage> VerifyMessageAPI;
+        event Action<ReplaceFAEndMessage> ReplaceFAEnd;
     }
 }
