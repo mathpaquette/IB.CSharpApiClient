@@ -1,23 +1,50 @@
-image: Visual Studio 2017
+image: Visual Studio 2019
 
-# version format
-version: 1.0.2-build{build}
+version: '{build}'
 
-artifacts:
-  - path: '**\AssemblyInfo.*'
+install:
+  - ps: >-
+      $FileVersion = Get-Content $env:appveyor_build_folder\VERSION
 
-assembly_info:
+      $Version = If ($env:appveyor_repo_branch -eq "release") {"$FileVersion"} Else {"$FileVersion.$env:appveyor_build_number"}
+
+      Update-AppveyorBuild -Version $Version
+
+  - ps: Start-FileDownload 'https://interactivebrokers.github.io/downloads/TWS%20API%20Install%20981.01.msi' -FileName 'TWS_API_Install_981.01.msi'
+
+  - cmd: >-
+      start /wait msiexec /a "TWS_API_Install_981.01.msi" /qb TARGETDIR=%cd%\tmp
+
+      mkdir packages\client
+
+      xcopy /e "tmp\TWS API\source\CSharpClient\client" packages\client
+
+      dir packages\client
+
+      xcopy /y packages\CSharpAPI.csproj packages\client\CSharpAPI.csproj
+
+      cat packages\client\CSharpAPI.csproj
+
+      del /s /q packages\client\Properties
+
+dotnet_csproj:
   patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 
 configuration: Release
 
 before_build:
   - nuget restore
-
+  - dotnet restore
+  
+test_script:
+  - cmd: dotnet test .\src\IB.CSharpApiClient.Tests\IB.CSharpApiClient.Tests.csproj
+  
 build:
   project: IB.CSharpApiClient.sln
   publish_nuget: true
@@ -33,16 +60,4 @@ deploy:
       secure: UBKXVuF4UwMea9mcl8hGLaHxOTBu3GNgzPvuEUWIzU+Nf6a8eTtBRyKITBepZl6i
     skip_symbols: false
     symbol_server: https://www.myget.org/F/inovitex/symbols/api/v2/package
-    artifact: /.*\.nupkg/
-
-  # Deploying to NuGet feed (NuGet.org)
-  - provider: NuGet
-    name: NuGet
-    on:
-      branch: master
-    server: https://www.nuget.org/api/v2/package
-    api_key:
-      secure: jMtKAe9m+jjen+zwguuceUoNSNI2EXyvj+/dJo2RnjsKnMV8DhVog/CVQG7V6Ai0
-    skip_symbols: false
-    symbol_server: https://nuget.smbsrc.net/
     artifact: /.*\.nupkg/
