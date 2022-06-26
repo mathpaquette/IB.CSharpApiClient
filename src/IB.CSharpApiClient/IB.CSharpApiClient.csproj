@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/mathpaquette/IB.CSharpApiClient</RepositoryUrl>
     <PackageProjectUrl>https://github.com/mathpaquette/IB.CSharpApiClient</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright © 2020 Mathieu Paquette</Copyright>
+    <Copyright>Copyright © 2022 Mathieu Paquette</Copyright>
     <Description>IB.CSharpApiClient</Description>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>

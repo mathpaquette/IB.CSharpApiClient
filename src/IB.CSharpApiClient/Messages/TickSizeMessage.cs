@@ -2,9 +2,9 @@
 {
     public class TickSizeMessage : MarketDataMessage
     {
-        public int Size { get; private set; }
+        public decimal Size { get; private set; }
 
-        public TickSizeMessage(int requestId, int field, int size) : base(requestId, field)
+        public TickSizeMessage(int requestId, int field, decimal size) : base(requestId, field)
         {
             Size = size;
         }

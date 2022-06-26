@@ -7,19 +7,8 @@ using IBApi;
 
 namespace IB.CSharpApiClient
 {
-    public class ClientCommandAsync : IClientCommandAsync
+    public partial class IBClient : IClientAsync
     {
-        private readonly EClientSocket _clientSocket;
-        private readonly IClientMessage _clientMessage;
-        private readonly TimeSpan _timeout;
-
-        public ClientCommandAsync(EClientSocket clientSocket, IClientMessage clientMessage, TimeSpan timeout)
-        {
-            _timeout = timeout;
-            _clientSocket = clientSocket;
-            _clientMessage = clientMessage;
-        }
-
         public Task<IEnumerable<ScannerDataMessage>> GetScannerDataAsync(ScannerSubscription subscription, List<TagValue> scannerSubscriptionOptions, List<TagValue> scannerSubscriptionFilterOptions)
         {
             var reqId = GetUniqueRequestId();
@@ -36,7 +25,7 @@ namespace IB.CSharpApiClient
 
         private async Task<IEnumerable<ScannerDataMessage>> GetScannerDataAsync(int reqId, Action reqScannerSubscription)
         {
-            var messages = new List<ScannerDataMessage>();
+            var data = new List<ScannerDataMessage>();
             var ct = new CancellationTokenSource(_timeout);
             var res = new TaskCompletionSource<IEnumerable<ScannerDataMessage>>();
 
@@ -45,33 +34,36 @@ namespace IB.CSharpApiClient
                 res.TrySetCanceled();
             }, false);
 
+            void OnError(ErrorMessage msg)
+            {
+                if (msg.RequestId == reqId)
+                    res.SetException(new IBClientException(msg.RequestId, msg.ErrorCode, msg.Message, msg.AdvancedOrderRejectJson));
+            }
 
             void OnScannerData(ScannerDataMessage msg)
             {
-                if (msg.RequestId != reqId)
-                    return;
-
-                messages.Add(msg);
+                if (msg.RequestId == reqId)
+                    data.Add(msg);
             }
 
             void OnScannerDataEnd(ScannerDataEndMessage msg)
             {
-                if (msg.RequestId != reqId)
-                    return;
-
-                res.TrySetResult(messages);
+                if (msg.RequestId == reqId)
+                    res.TrySetResult(data);
             }
 
-            _clientMessage.ScannerData += OnScannerData;
-            _clientMessage.ScannerDataEnd += OnScannerDataEnd;
+            Error += OnError;
+            ScannerData += OnScannerData;
+            ScannerDataEnd += OnScannerDataEnd;
 
             reqScannerSubscription();
 
             await res.Task.ContinueWith(x =>
             {
                 _clientSocket.cancelScannerSubscription(reqId);
-                _clientMessage.ScannerData -= OnScannerData;
-                _clientMessage.ScannerDataEnd -= OnScannerDataEnd;
+                Error -= OnError;
+                ScannerData -= OnScannerData;
+                ScannerDataEnd -= OnScannerDataEnd;
                 ct.Dispose();
             }, TaskContinuationOptions.None).ConfigureAwait(false);
 

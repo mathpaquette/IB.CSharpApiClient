@@ -7,9 +7,9 @@
         public int Operation { get; private set; }
         public int Side { get; private set; }
         public double Price { get; private set; }
-        public int Size { get; private set; }
+        public decimal Size { get; private set; }
 
-        public UpdateMktDepthMessage(int tickerId, int position, int operation, int side, double price, int size)
+        public UpdateMktDepthMessage(int tickerId, int position, int operation, int side, double price, decimal size)
         {
             TickerId = tickerId;
             Position = position;

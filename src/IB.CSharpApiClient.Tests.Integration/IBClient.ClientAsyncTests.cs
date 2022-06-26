@@ -6,15 +6,21 @@ using NUnit.Framework;
 
 namespace IB.CSharpApiClient.Tests.Integration
 {
-    public class ClientCommandAsyncTests
+    public class IBClientClientAsyncTests
     {
         private IBClient _client;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             _client = IBClientFactory.CreateNew();
-            _client.Connect("127.0.0.1", 4002, 2);
+            _client.Connect("127.0.0.1", 4001, 2);
+        }
+
+        [OneTimeTearDown]
+        public void CleanUp()
+        {
+            _client.Disconnect();
         }
 
         [Test]
@@ -32,8 +38,8 @@ namespace IB.CSharpApiClient.Tests.Integration
             var scanners = await _client.GetScannerDataAsync(subscription, "", "");
 
             // Assert
-            var symbols = scanners.Select(x => x.ContractDetails.Contract.Symbol);
-            Assert.Positive(symbols.Count());
+            var symbols = scanners.Select(x => x.ContractDetails.Contract.Symbol).ToList();
+            Assert.Positive(symbols.Count);
         }
 
 
@@ -52,8 +58,8 @@ namespace IB.CSharpApiClient.Tests.Integration
             var scanners = await _client.GetScannerDataAsync(subscription, new List<TagValue>(), new List<TagValue>());
 
             // Assert
-            var symbols = scanners.Select(x => x.ContractDetails.Contract.Symbol);
-            Assert.Positive(symbols.Count());
+            var symbols = scanners.Select(x => x.ContractDetails.Contract.Symbol).ToList();
+            Assert.Positive(symbols.Count);
         }
     }
 }
