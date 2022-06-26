@@ -10,10 +10,10 @@ install:
 
       Update-AppveyorBuild -Version $Version
 
-  - ps: Start-FileDownload 'https://interactivebrokers.github.io/downloads/TWS%20API%20Install%20981.01.msi' -FileName 'TWS_API_Install_981.01.msi'
+  - ps: Start-FileDownload 'https://interactivebrokers.github.io/downloads/TWS%20API%20Install%201016.01.msi' -FileName 'TWS_API_Install_1016.01.msi'
 
   - cmd: >-
-      start /wait msiexec /a "TWS_API_Install_981.01.msi" /qb TARGETDIR=%cd%\tmp
+      start /wait msiexec /a "TWS_API_Install_1016.01.msi" /qb TARGETDIR=%cd%\tmp
 
       mkdir packages\client
 

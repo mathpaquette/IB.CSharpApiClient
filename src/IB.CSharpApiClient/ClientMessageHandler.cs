@@ -5,7 +5,7 @@ using IBApi;
 
 namespace IB.CSharpApiClient
 {
-    public class MessageHandler : IMessageHandler
+    public class ClientMessageHandler : IClientMessageHandler
     {
         public event Action<AccountDownloadEndMessage> AccountDownloadEnd;
         public event Action<AccountSummaryMessage> AccountSummary;
@@ -91,11 +91,20 @@ namespace IB.CSharpApiClient
         public event Action<VerifyCompletedMessage> VerifyCompleted;
         public event Action<VerifyMessageAPIMessage> VerifyMessageAPI;
         public event Action<ReplaceFAEndMessage> ReplaceFAEnd;
+        public event Action<WshMetaDataMessage> WshMetaData;
+        public event Action<HistoricalScheduleMessage> HistoricalSchedule;
+        public event Action<UserInfoMessage> UserInfo;
+        public event Action<WshEventDataMessage> WshEventData;
 
-        #region Handlers
         public void accountDownloadEnd(string account)
         {
             AccountDownloadEnd?.Invoke(new AccountDownloadEndMessage(account));
+        }
+
+        public void orderStatus(int orderId, string status, decimal filled, decimal remaining, double avgFillPrice, int permId,
+            int parentId, double lastFillPrice, int clientId, string whyHeld, double mktCapPrice)
+        {
+            OrderStatus?.Invoke(new OrderStatusMessage(orderId, status, filled, remaining, avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld, mktCapPrice));
         }
 
         public void accountSummary(int reqId, string account, string tag, string value, string currency)
@@ -143,9 +152,34 @@ namespace IB.CSharpApiClient
             ReplaceFAEnd?.Invoke(new ReplaceFAEndMessage(reqId, text));
         }
 
+        public void wshMetaData(int reqId, string dataJson)
+        {
+            WshMetaData?.Invoke(new WshMetaDataMessage(reqId, dataJson));
+        }
+
+        public void wshEventData(int reqId, string dataJson)
+        {
+            WshEventData?.Invoke(new WshEventDataMessage(reqId, dataJson));
+        }
+
+        public void historicalSchedule(int reqId, string startDateTime, string endDateTime, string timeZone, HistoricalSession[] sessions)
+        {
+            HistoricalSchedule?.Invoke(new HistoricalScheduleMessage(reqId, startDateTime, endDateTime, timeZone, sessions));
+        }
+
+        public void userInfo(int reqId, string whiteBrandingId)
+        {
+            UserInfo?.Invoke(new UserInfoMessage(reqId, whiteBrandingId));
+        }
+
         public void connectAck()
         {
             ConnectAck?.Invoke();
+        }
+
+        public void positionMulti(int requestId, string account, string modelCode, Contract contract, decimal pos, double avgCost)
+        {
+            PositionMulti?.Invoke(new PositionMultiMessage(requestId, account, modelCode, contract, pos, avgCost));
         }
 
         public void connectionClosed()
@@ -161,6 +195,11 @@ namespace IB.CSharpApiClient
         public void contractDetailsEnd(int reqId)
         {
             ContractDetailsEnd?.Invoke(new ContractDetailsEndMessage(reqId));
+        }
+
+        public void error(int id, int errorCode, string errorMsg, string advancedOrderRejectJson)
+        {
+            Error?.Invoke(new ErrorMessage(id, errorCode, errorMsg, advancedOrderRejectJson));
         }
 
         public void currentTime(long time)
@@ -198,11 +237,6 @@ namespace IB.CSharpApiClient
         public void error(string str)
         {
             Error?.Invoke(new ErrorMessage(str));
-        }
-
-        public void error(int id, int errorCode, string errorMsg)
-        {
-            Error?.Invoke(new ErrorMessage(id, errorCode, errorMsg));
         }
 
         public void execDetails(int reqId, Contract contract, Execution execution)
@@ -260,6 +294,11 @@ namespace IB.CSharpApiClient
             HistoricalNewsEnd?.Invoke(new HistoricalNewsEndMessage(requestId, hasMore));
         }
 
+        public void pnlSingle(int reqId, decimal pos, double dailyPnL, double unrealizedPnL, double realizedPnL, double value)
+        {
+            PnLSingle?.Invoke(new PnLSingleMessage(reqId, pos, dailyPnL, unrealizedPnL, realizedPnL, value));
+        }
+
         public void historicalTicks(int reqId, HistoricalTick[] ticks, bool done)
         {
             HistoricalTicks?.Invoke(new HistoricalTicksMessage(reqId, ticks, done));
@@ -275,6 +314,16 @@ namespace IB.CSharpApiClient
             HistoricalTicksLast?.Invoke(new HistoricalTicksLastMessage(reqId, ticks, done));
         }
 
+        public void tickByTickAllLast(int reqId, int tickType, long time, double price, decimal size, TickAttribLast tickAttribLast, string exchange, string specialConditions)
+        {
+            TickByTickAllLast?.Invoke(new TickByTickAllLastMessage(reqId, tickType, time, price, size, tickAttribLast, exchange, specialConditions));
+        }
+
+        public void tickByTickBidAsk(int reqId, long time, double bidPrice, double askPrice, decimal bidSize, decimal askSize, TickAttribBidAsk tickAttribBidAsk)
+        {
+            TickByTickBidAsk?.Invoke(new TickByTickBidAskMessage(reqId, time, bidPrice, askPrice, bidSize, askSize, tickAttribBidAsk));
+        }
+
         public void managedAccounts(string accountsList)
         {
             ManagedAccounts?.Invoke(new ManagedAccountsMessage(accountsList));
@@ -283,6 +332,16 @@ namespace IB.CSharpApiClient
         public void marketDataType(int reqId, int marketDataType)
         {
             MarketDataType?.Invoke(new MarketDataTypeMessage(reqId, marketDataType));
+        }
+
+        public void updateMktDepth(int tickerId, int position, int operation, int side, double price, decimal size)
+        {
+            UpdateMktDepth?.Invoke(new UpdateMktDepthMessage(tickerId, position, operation, side, price, size));
+        }
+
+        public void updateMktDepthL2(int tickerId, int position, string marketMaker, int operation, int side, double price, decimal size, bool isSmartDepth)
+        {
+            UpdateMktDepthL2?.Invoke(new UpdateMktDepthL2Message(tickerId, position, marketMaker, operation, side, price, size, isSmartDepth));
         }
 
         public void marketRule(int marketRuleId, PriceIncrement[] priceIncrements)
@@ -325,22 +384,12 @@ namespace IB.CSharpApiClient
             OrderBound?.Invoke(new OrderBoundMessage(orderId, apiClientId, apiOrderId));
         }
 
-        public void orderStatus(int orderId, string status, double filled, double remaining, double avgFillPrice, int permId, int parentId, double lastFillPrice, int clientId, string whyHeld, double mktCapPrice)
-        {
-            OrderStatus?.Invoke(new OrderStatusMessage(orderId, status, filled, remaining, avgFillPrice, permId, parentId, lastFillPrice, clientId, whyHeld, mktCapPrice));
-        }
-
         public void pnl(int reqId, double dailyPnL, double unrealizedPnL, double realizedPnL)
         {
             PnL?.Invoke(new PnLMessage(reqId, dailyPnL, unrealizedPnL, realizedPnL));
         }
 
-        public void pnlSingle(int reqId, int pos, double dailyPnL, double unrealizedPnL, double realizedPnL, double value)
-        {
-            PnLSingle?.Invoke(new PnLSingleMessage(reqId, pos, dailyPnL, unrealizedPnL, realizedPnL, value));
-        }
-
-        public void position(string account, Contract contract, double pos, double avgCost)
+        public void position(string account, Contract contract, decimal pos, double avgCost)
         {
             Position?.Invoke(new PositionMessage(account, contract, pos, avgCost));
         }
@@ -350,19 +399,14 @@ namespace IB.CSharpApiClient
             PositionEnd?.Invoke();
         }
 
-        public void positionMulti(int requestId, string account, string modelCode, Contract contract, double pos, double avgCost)
+        public void realtimeBar(int reqId, long date, double open, double high, double low, double close, decimal volume, decimal WAP, int count)
         {
-            PositionMulti?.Invoke(new PositionMultiMessage(requestId, account, modelCode, contract, pos, avgCost));
+            RealTimeBar?.Invoke(new RealTimeBarMessage(reqId, date, open, high, low, close, volume, WAP, count));
         }
 
         public void positionMultiEnd(int requestId)
         {
             PositionMultiEnd?.Invoke(new PositionMultiEndMessage(requestId));
-        }
-
-        public void realtimeBar(int reqId, long date, double open, double high, double low, double close, long volume, double WAP, int count)
-        {
-            RealTimeBar?.Invoke(new RealTimeBarMessage(reqId, date, open, high, low, close, volume, WAP, count));
         }
 
         public void receiveFA(int faDataType, string faXmlData)
@@ -420,16 +464,6 @@ namespace IB.CSharpApiClient
             SymbolSamples?.Invoke(new SymbolSamplesMessage(reqId, contractDescriptions));
         }
 
-        public void tickByTickAllLast(int reqId, int tickType, long time, double price, int size, TickAttribLast tickAttriblast, string exchange, string specialConditions)
-        {
-            TickByTickAllLast?.Invoke(new TickByTickAllLastMessage(reqId, tickType, time, price, size, tickAttriblast, exchange, specialConditions));
-        }
-
-        public void tickByTickBidAsk(int reqId, long time, double bidPrice, double askPrice, int bidSize, int askSize, TickAttribBidAsk tickAttribBidAsk)
-        {
-            TickByTickBidAsk?.Invoke(new TickByTickBidAskMessage(reqId, time, bidPrice, askPrice, bidSize, askSize, tickAttribBidAsk));
-        }
-
         public void tickByTickMidPoint(int reqId, long time, double midPoint)
         {
             TickByTickMidPoint?.Invoke(new TickByTickMidPointMessage(reqId, time, midPoint));
@@ -455,14 +489,14 @@ namespace IB.CSharpApiClient
             TickPrice?.Invoke(new TickPriceMessage(tickerId, field, price, attribs));
         }
 
+        public void tickSize(int tickerId, int field, decimal size)
+        {
+            TickSize?.Invoke(new TickSizeMessage(tickerId, field, size));
+        }
+
         public void tickReqParams(int tickerId, double minTick, string bboExchange, int snapshotPermissions)
         {
             TickReqParams?.Invoke(new TickReqParamsMessage(tickerId, minTick, bboExchange, snapshotPermissions));
-        }
-
-        public void tickSize(int tickerId, int field, int size)
-        {
-            TickSize?.Invoke(new TickSizeMessage(tickerId, field, size));
         }
 
         public void tickSnapshotEnd(int tickerId)
@@ -475,6 +509,11 @@ namespace IB.CSharpApiClient
             TickString?.Invoke(new TickStringMessage(tickerId, field, value));
         }
 
+        public void updatePortfolio(Contract contract, decimal position, double marketPrice, double marketValue, double averageCost, double unrealizedPNL, double realizedPNL, string accountName)
+        {
+            UpdatePortfolio?.Invoke(new UpdatePortfolioMessage(contract, position, marketPrice, marketValue, averageCost, unrealizedPNL, realizedPNL, accountName));
+        }
+
         public void updateAccountTime(string timestamp)
         {
             UpdateAccountTime?.Invoke(new UpdateAccountTimeMessage(timestamp));
@@ -485,24 +524,9 @@ namespace IB.CSharpApiClient
             UpdateAccountValue?.Invoke(new UpdateAccountValueMessage(key, value, currency, accountName));
         }
 
-        public void updateMktDepth(int tickerId, int position, int operation, int side, double price, int size)
-        {
-            UpdateMktDepth?.Invoke(new UpdateMktDepthMessage(tickerId, position, operation, side, price, size));
-        }
-
-        public void updateMktDepthL2(int tickerId, int position, string marketMaker, int operation, int side, double price, int size, bool isSmartDepth)
-        {
-            UpdateMktDepthL2?.Invoke(new UpdateMktDepthL2Message(tickerId, position, marketMaker, operation, side, price, size, isSmartDepth));
-        }
-
         public void updateNewsBulletin(int msgId, int msgType, string message, string origExchange)
         {
             UpdateNewsBulletin?.Invoke(new UpdateNewsBulletinMessage(msgId, msgType, message, origExchange));
-        }
-
-        public void updatePortfolio(Contract contract, double position, double marketPrice, double marketValue, double averageCost, double unrealizedPNL, double realizedPNL, string accountName)
-        {
-            UpdatePortfolio?.Invoke(new UpdatePortfolioMessage(contract, position, marketPrice, marketValue, averageCost, unrealizedPNL, realizedPNL, accountName));
         }
 
         public void verifyAndAuthCompleted(bool isSuccessful, string errorText)
@@ -523,7 +547,6 @@ namespace IB.CSharpApiClient
         public void verifyMessageAPI(string apiData)
         {
             VerifyMessageAPI?.Invoke(new VerifyMessageAPIMessage(apiData));
-        } 
-        #endregion
+        }
     }
 }

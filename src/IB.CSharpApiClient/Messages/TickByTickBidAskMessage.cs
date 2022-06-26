@@ -8,11 +8,11 @@ namespace IB.CSharpApiClient.Messages
         public long Time { get; private set; }
         public double BidPrice { get; private set; }
         public double AskPrice { get; private set; }
-        public long BidSize { get; private set; }
-        public long AskSize { get; private set; }
+        public decimal BidSize { get; private set; }
+        public decimal AskSize { get; private set; }
         public TickAttribBidAsk TickAttribBidAsk { get; private set; }
 
-        public TickByTickBidAskMessage(int reqId, long time, double bidPrice, double askPrice, long bidSize, long askSize, TickAttribBidAsk tickAttribBidAsk)
+        public TickByTickBidAskMessage(int reqId, long time, double bidPrice, double askPrice, decimal bidSize, decimal askSize, TickAttribBidAsk tickAttribBidAsk)
         {
             ReqId = reqId;
             Time = time;

@@ -56,6 +56,7 @@ namespace IB.CSharpApiClient
         event Action<PositionMultiEndMessage> PositionMultiEnd;
         event Action<RealTimeBarMessage> RealTimeBar;
         event Action<ReceiveFAMessage> ReceiveFA;
+        event Action<ReplaceFAEndMessage> ReplaceFAEnd;
         event Action<RerouteMktDataReqMessage> RerouteMktDataReq;
         event Action<RerouteMktDepthReqMessage> RerouteMktDepthReq;
         event Action<ScannerDataMessage> ScannerData;
@@ -88,6 +89,9 @@ namespace IB.CSharpApiClient
         event Action<VerifyAndAuthMessageAPIMessage> VerifyAndAuthMessageAPI;
         event Action<VerifyCompletedMessage> VerifyCompleted;
         event Action<VerifyMessageAPIMessage> VerifyMessageAPI;
-        event Action<ReplaceFAEndMessage> ReplaceFAEnd;
+        event Action<WshEventDataMessage> WshEventData;
+        event Action<WshMetaDataMessage> WshMetaData;
+        event Action<HistoricalScheduleMessage> HistoricalSchedule;
+        event Action<UserInfoMessage> UserInfo;
     }
 }

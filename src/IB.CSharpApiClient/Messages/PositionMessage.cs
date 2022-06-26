@@ -6,10 +6,10 @@ namespace IB.CSharpApiClient.Messages
     {
         public string Account { get; private set; }
         public Contract Contract { get; private set; }
-        public double Position { get; private set; }
+        public decimal Position { get; private set; }
         public double AverageCost { get; private set; }
 
-        public PositionMessage(string account, Contract contract, double pos, double avgCost)
+        public PositionMessage(string account, Contract contract, decimal pos, double avgCost)
         {
             Account = account;
             Contract = contract;

@@ -8,10 +8,10 @@
         public int Operation { get; private set; }
         public int Side { get; private set; }
         public double Price { get; private set; }
-        public int Size { get; private set; }
+        public decimal Size { get; private set; }
         public bool IsSmartDepth { get; private set; }
 
-        public UpdateMktDepthL2Message(int tickerId, int position, string marketMaker, int operation, int side, double price, int size, bool isSmartDepth)
+        public UpdateMktDepthL2Message(int tickerId, int position, string marketMaker, int operation, int side, double price, decimal size, bool isSmartDepth)
         {
             TickerId = tickerId;
             Position = position;

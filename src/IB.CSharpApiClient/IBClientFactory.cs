@@ -8,23 +8,17 @@ namespace IB.CSharpApiClient
     {
         public static IBClient CreateNew()
         {
-            return CreateNew(IBClientDefault.Timeout);
-        }
-
-        public static IBClient CreateNew(int timeoutMs)
-        {
-            return CreateNew(TimeSpan.FromMilliseconds(timeoutMs));
+            return CreateNew(TimeSpan.FromSeconds(5));
         }
 
         public static IBClient CreateNew(TimeSpan timeout)
         {
             var signal = new EReaderMonitorSignal();
-            var messageHandler = new MessageHandler();
-            var clientSocket = new EClientSocket(messageHandler, signal);
-            var clientCommandAsync = new ClientCommandAsync(clientSocket, messageHandler, timeout);
+            var messageHandler = new ClientMessageHandler();
+            var clientSocket = new IBClientSocket(messageHandler, signal);
             var manualResetEventSlim = new ManualResetEventSlim();
 
-            return new IBClient(signal, clientSocket, clientCommandAsync, messageHandler, manualResetEventSlim);
+            return new IBClient(signal, clientSocket, messageHandler, manualResetEventSlim, timeout);
         }
     }
 }

@@ -5,10 +5,10 @@ namespace IB.CSharpApiClient.Messages
 {
     public class RealTimeBarMessage : HistoricalDataMessage
     {
-        public long LongVolume { get; private set; }
+        public decimal LongVolume { get; private set; }
         public long Timestamp { get; private set; }
 
-        public RealTimeBarMessage(int reqId, long date, double open, double high, double low, double close, long volume, double WAP, int count)
+        public RealTimeBarMessage(int reqId, long date, double open, double high, double low, double close, decimal volume, decimal WAP, int count)
             : base(reqId, new Bar(UnixTimestampToDateTime(date).ToString("yyyyMMdd hh:mm:ss"), open, high, low, close, -1, count, WAP))
         {
             Timestamp = date;

@@ -10,9 +10,9 @@ namespace IB.CSharpApiClient.Messages
         public double High { get; private set; }
         public double Low { get; private set; }
         public double Close { get; private set; }
-        public long Volume { get; private set; }
+        public decimal Volume { get; private set; }
         public int Count { get; private set; }
-        public double Wap { get; private set; }
+        public decimal Wap { get; private set; }
         public bool HasGaps { get; private set; }
 
         public HistoricalDataMessage(int reqId, Bar bar)

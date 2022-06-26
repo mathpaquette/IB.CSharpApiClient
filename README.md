@@ -9,12 +9,13 @@ Please note due to Interactive Brokers license restriction, you need to manually
 
 1. Clone `git clone https://github.com/mathpaquette/IB.CSharpApiClient.git` 
 2. Accept [TWS API license](https://interactivebrokers.github.io/) 
-3. Download and Install [TWS API v9.81](https://interactivebrokers.github.io/downloads/TWS%20API%20Install%20981.01.msi) 
+3. Download and Install [TWS API v10.16](https://interactivebrokers.github.io/downloads/TWS%20API%20Install%201016.01.msi) 
 4. Copy `<TWS API install folder>\source\CSharpClient\client` to `IB.CSharpApiClient\packages`
 5. Build IB.CSharpApiClient
    
 ## Features
-- .NET Standard
+- Unified easy to use client
+- .NET Standard [2.0](https://docs.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
 - Events
 - Async/Await
 - Automatic reconnection (WIP)

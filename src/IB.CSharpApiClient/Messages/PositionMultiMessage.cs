@@ -8,10 +8,10 @@ namespace IB.CSharpApiClient.Messages
         public string Account { get; private set; }
         public string ModelCode { get; private set; }
         public Contract Contract { get; private set; }
-        public double Position { get; private set; }
+        public decimal Position { get; private set; }
         public double AverageCost { get; private set; }
 
-        public PositionMultiMessage(int reqId, string account, string modelCode, Contract contract, double pos, double avgCost)
+        public PositionMultiMessage(int reqId, string account, string modelCode, Contract contract, decimal pos, double avgCost)
         {
             ReqId = reqId;
             Account = account;
