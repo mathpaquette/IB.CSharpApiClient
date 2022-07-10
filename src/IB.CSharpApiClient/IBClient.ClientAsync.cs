@@ -9,6 +9,8 @@ namespace IB.CSharpApiClient
 {
     public partial class IBClient : IClientAsync
     {
+        private readonly Random _random = new Random(DateTime.Now.Millisecond);
+
         public Task<IEnumerable<ScannerDataMessage>> GetScannerDataAsync(ScannerSubscription subscription, List<TagValue> scannerSubscriptionOptions, List<TagValue> scannerSubscriptionFilterOptions)
         {
             var reqId = GetUniqueRequestId();
@@ -72,7 +74,10 @@ namespace IB.CSharpApiClient
 
         private int GetUniqueRequestId()
         {
-            return new Random(DateTime.Now.Millisecond).Next();
+            lock (_random)
+            {
+                return _random.Next();
+            }
         }
     }
 }
